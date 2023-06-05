@@ -36,6 +36,7 @@ outputs:
       - bin                                 # [linux]
       - nvvm/bin                            # [linux]
       - nvvm/libdevice                      # [linux]
+      - etc/conda/activate.d/cuda-nvcc-tools_activate.sh  # [linux]
     requirements:
       build:
         - {{ compiler("c") }}
