@@ -2,9 +2,9 @@
 
 set -ex
 
-[[ "@cross_target_platform@" == "linux-64" ]] && targetsDir="targets/x86_64-linux"
-[[ "@cross_target_platform@" == "linux-ppc64le" ]] && targetsDir="targets/ppc64le-linux"
-[[ "@cross_target_platform@" == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
+[[ "@target_platform@" == "linux-64" ]] && targetsDir="targets/x86_64-linux"
+[[ "@target_platform@" == "linux-ppc64le" ]] && targetsDir="targets/ppc64le-linux"
+[[ "@target_platform@" == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
 
 # For conda-build we add the host requirements prefix to the include and link
 # paths because it is separate from the build prefix where nvcc is installed
