@@ -32,7 +32,7 @@ build:
 
 outputs:
   - name: cuda-nvcc-tools
-    files:
+    files:                                  # [linux]
       - bin                                 # [linux]
       - nvvm/bin                            # [linux]
       - nvvm/libdevice                      # [linux]
@@ -118,7 +118,7 @@ outputs:
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
-    files:
+    files:                             # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
       - nvvm/include                   # [linux]
       - nvvm/lib64                     # [linux]
