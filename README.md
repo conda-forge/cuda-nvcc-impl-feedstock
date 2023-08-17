@@ -3,6 +3,7 @@ About cuda-nvcc-impl-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-nvcc-impl-feedstock/blob/main/LICENSE.txt)
 
+
 About cuda-nvcc-impl
 --------------------
 
@@ -16,6 +17,7 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
 
+
 About cuda-nvcc-tools
 ---------------------
 
@@ -28,6 +30,7 @@ Summary: Architecture independent part of CUDA NVCC compiler.
 Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
+
 
 About cuda-nvcc-dev_linux-64
 ----------------------------
@@ -220,7 +223,4 @@ Feedstock Maintainers
 =====================
 
 * [@adibbley](https://github.com/adibbley/)
-
-
-<!-- dummy commit to enable rerendering -->
 
