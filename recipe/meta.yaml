@@ -28,7 +28,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [osx or win]
+  skip: true  # [osx]
 
 outputs:
   - name: cuda-nvcc-tools
@@ -112,6 +112,7 @@ outputs:
 
   - name: cuda-nvcc-impl
     build:
+      skip: true  # [win]
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable
       binary_relocation: False
     run_exports:
