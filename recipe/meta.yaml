@@ -68,6 +68,8 @@ outputs:
   - name: cuda-nvcc-dev_{{ target_platform }}
     build:
       noarch: generic
+      missing_dso_whitelist:                     # [win]
+        - "*/api-ms-win-core-winrt-*.dll"        # [win]
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
@@ -112,7 +114,6 @@ outputs:
 
   - name: cuda-nvcc-impl
     build:
-      skip: true  # [win]
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable
       binary_relocation: False
     run_exports:
@@ -141,11 +142,12 @@ outputs:
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - gxx
-        - gcc
+        - gxx              # [linux]
+        - gcc              # [linux]
+        - c-compiler       # [win]
         - cmake
-        - cuda-driver-dev
-        - git  # [linux]
+        - cuda-driver-dev  # [linux]
+        - git              # [linux]
         - ninja
       files:
         - test.cu
