@@ -79,10 +79,10 @@ outputs:
       - targets/{{ target_name }}/nvvm     # [linux]
       - targets/{{ target_name }}/include  # [linux]
       - targets/{{ target_name }}/lib      # [linux]
-      - Library\bin      # [win]
-      - Library\nvvm     # [win]
-      - Library\include  # [win]
-      - Library\lib      # [win]
+      - Library\bin                           # [win]
+      - Library\nvvm                          # [win]
+      - Library\include\crt                   # [win]
+      - Library\include\fatbinary_section.h   # [win]
     requirements:
       build:
       host:
@@ -102,6 +102,7 @@ outputs:
         - test -f $PREFIX/targets/{{ target_name }}/include/nvPTXCompiler.h           # [linux]
         - if not exist %LIBRARY_LIB%\nvptxcompiler_static.lib exit 1  # [win]
         - if not exist %LIBRARY_INC%\nvPTXCompiler.h exit 1           # [win]
+        - if not exist %LIBRARY_INC%\crt\common_functions.h exit 1    # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
