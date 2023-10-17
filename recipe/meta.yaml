@@ -147,7 +147,7 @@ outputs:
         - {{ compiler("cxx") }}
         - gxx              # [linux]
         - gcc              # [linux]
-        - c-compiler       # [win]
+        - vs{{ VSYEAR }}_win-64 =={{ CL_VERSION }}  # [win]
         - cmake
         - cuda-driver-dev  # [linux]
         - git              # [linux]
