@@ -1,3 +1,9 @@
+CL_VERSION:
+- 19.29.30139
+- 19.37.32822
+VSYEAR:
+- '2019'
+- '2022'
 c_compiler:
 - vs2019
 channel_sources:
@@ -8,3 +14,6 @@ cxx_compiler:
 - vs2019
 target_platform:
 - win-64
+zip_keys:
+- - VSYEAR
+  - CL_VERSION
