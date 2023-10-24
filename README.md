@@ -3,6 +3,7 @@ About cuda-nvcc-impl-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-nvcc-impl-feedstock/blob/main/LICENSE.txt)
 
+
 About cuda-nvcc-impl
 --------------------
 
@@ -16,6 +17,7 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
 
+
 About cuda-nvcc-tools
 ---------------------
 
@@ -28,6 +30,7 @@ Summary: Architecture independent part of CUDA NVCC compiler.
 Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
+
 
 About cuda-nvcc-dev_linux-64
 ----------------------------
@@ -86,6 +89,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19442&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-nvcc-impl-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19442&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-nvcc-impl-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>

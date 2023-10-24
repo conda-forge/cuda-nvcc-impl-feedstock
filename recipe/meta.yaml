@@ -27,12 +27,12 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 0
-  skip: true  # [osx or win]
+  number: 1
+  skip: true  # [osx]
 
 outputs:
   - name: cuda-nvcc-tools
-    files:
+    files:                                  # [linux]
       - bin                                 # [linux]
       - nvvm/bin                            # [linux]
       - nvvm/libdevice                      # [linux]
@@ -68,6 +68,8 @@ outputs:
   - name: cuda-nvcc-dev_{{ target_platform }}
     build:
       noarch: generic
+      missing_dso_whitelist:                     # [win]
+        - "*/api-ms-win-core-winrt-*.dll"        # [win]
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
@@ -77,10 +79,14 @@ outputs:
       - targets/{{ target_name }}/nvvm     # [linux]
       - targets/{{ target_name }}/include  # [linux]
       - targets/{{ target_name }}/lib      # [linux]
-      - Library\bin      # [win]
-      - Library\nvvm     # [win]
-      - Library\include  # [win]
-      - Library\lib      # [win]
+      - Library\bin\crt                       # [win]
+      - Library\bin\*.exe                     # [win]
+      - Library\bin\nvcc.profile              # [win]
+      - Library\nvvm                          # [win]
+      - Library\include\crt                   # [win]
+      - Library\include\fatbinary_section.h   # [win]
+      - Library\include\nvPTXCompiler.h       # [win]
+      - Library\lib\nvptxcompiler_static.lib  # [win]
     requirements:
       build:
       host:
@@ -98,8 +104,12 @@ outputs:
         - test -L $PREFIX/targets/{{ target_name }}/nvvm          # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/lib/libnvptxcompiler_static.a     # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/include/nvPTXCompiler.h           # [linux]
+        - if not exist %LIBRARY_BIN%\crt\link.stub exit 1             # [win]
+        - if not exist %LIBRARY_BIN%\nvcc.exe exit 1                  # [win]
+        - if not exist %LIBRARY_BIN%\nvcc.profile exit 1              # [win]
         - if not exist %LIBRARY_LIB%\nvptxcompiler_static.lib exit 1  # [win]
         - if not exist %LIBRARY_INC%\nvPTXCompiler.h exit 1           # [win]
+        - if not exist %LIBRARY_INC%\crt\common_functions.h exit 1    # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
@@ -117,7 +127,7 @@ outputs:
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
-    files:
+    files:                             # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
       - nvvm/include                   # [linux]
       - nvvm/lib64                     # [linux]
@@ -136,15 +146,17 @@ outputs:
       run_constrained:
         - gcc_impl_{{ target_platform }} >=6,<13  # [linux]
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
+        - vc >={{ VCVER }}                        # [win]
     test:
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - gxx
-        - gcc
+        - gxx              # [linux]
+        - gcc              # [linux]
+        - vs{{ VSYEAR }}_win-64 =={{ CL_VERSION }}  # [win]
         - cmake
-        - cuda-driver-dev
-        - git  # [linux]
+        - cuda-driver-dev  # [linux]
+        - git              # [linux]
         - ninja
       files:
         - test.cu
