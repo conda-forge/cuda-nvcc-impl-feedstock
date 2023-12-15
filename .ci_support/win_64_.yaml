@@ -1,5 +1,7 @@
 CL_VERSION:
 - 19.29.30139
+VCVER:
+- '14.2'
 VSYEAR:
 - '2019'
 c_compiler:
@@ -13,5 +15,6 @@ cxx_compiler:
 target_platform:
 - win-64
 zip_keys:
-- - VSYEAR
+- - VCVER
+  - VSYEAR
   - CL_VERSION
