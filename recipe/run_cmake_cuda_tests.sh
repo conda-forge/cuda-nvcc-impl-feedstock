@@ -18,6 +18,7 @@ cd cmake-tests/build
 # Requires execution on a machine with a CUDA GPU
 #   Cuda.ObjectLibrary
 #   Cuda.WithC
+#   Cuda.StubRPATH
 #   CudaOnly.ArchSpecial
 #   CudaOnly.GPUDebugFlag
 #   CudaOnly.SeparateCompilationPTX
@@ -29,4 +30,4 @@ cd cmake-tests/build
 #   *Toolkit*
 # Failing due to undefined symbol: __libc_dl_error_tsd, version GLIBC_PRIVATE
 #   Cuda.Complex
-CUDAHOSTCXX=$CXX ctest -L CUDA --output-on-failure -j $(nproc) -E "(ProperDeviceLibraries|SharedRuntime|ObjectLibrary|WithC|ArchSpecial|GPUDebugFlag|SeparateCompilationPTX|WithDefs|CUBIN|Fatbin|OptixIR|CUDA_architectures|Toolkit|Cuda.Complex)"
+CUDAHOSTCXX=$CXX ctest -L CUDA --output-on-failure -j $(nproc) -E "(ProperDeviceLibraries|SharedRuntime|ObjectLibrary|WithC|StubRPATH|ArchSpecial|GPUDebugFlag|SeparateCompilationPTX|WithDefs|CUBIN|Fatbin|OptixIR|CUDA_architectures|Toolkit|Cuda.Complex)"

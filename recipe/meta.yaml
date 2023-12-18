@@ -1,6 +1,6 @@
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.0.76" %}
-{% set cuda_version = "12.0" %}
+{% set version = "12.1.105" %}
+{% set cuda_version = "12.1" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -18,16 +18,16 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 160ca9f8828f53daa4b2066c5361aacb45fa2575885f70c223cda1d11df53d6f  # [linux64]
-  sha256: dc5bd7eac57b32a9645c0c23c6a1ba8a9533e846eeec31414e1aa4230afee2f8  # [ppc64le]
-  sha256: 85c8c643ea2cfa398e1b5ffcd597f5bb3b738526c9e3fb8e39dd909c55345f36  # [aarch64]
-  sha256: f67406f44263f0e4a110a8cf0200bff1d3d0e32917db8a7c9e417a87eb7ca372  # [win]
+  sha256: 0b85f7eee17788abbd170b0b493c74ce2e9fd5a9604461b99c2c378165e1083b  # [linux64]
+  sha256: e6e2c4c80e44409cd9006c6f1fd56d7c48c4a8bcd2d130f9405bcb7af16660a0  # [ppc64le]
+  sha256: 6e795ec791241e9320ec300657408cbfafbe7e79ceda0da46522cc85ced358f4  # [aarch64]
+  sha256: 3b452d704c92e8af6d59247ee842b2ca8c8e37dd04c015eea59c74c265672074  # [win]
   patches:
     - nvcc.profile.patch      # [linux]
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [osx]
 
 outputs:
@@ -89,12 +89,15 @@ outputs:
       - Library\lib\nvptxcompiler_static.lib  # [win]
     requirements:
       build:
+        - sysroot_{{ target_platform }} 2.17    # [linux]
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-version {{ cuda_version }}
         - cuda-nvcc-tools {{ cuda_version }}
+        - libgcc-ng >=6                         # [linux]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
+        - libgcc-ng >=6                         # [linux]
       run_constrained:
         - gcc_impl_{{ target_platform }} >=6,<13  # [linux]
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
@@ -191,4 +194,4 @@ about:
 extra:
   feedstock-name: cuda-nvcc-impl
   recipe-maintainers:
-    - adibbley
+    - conda-forge/cuda
