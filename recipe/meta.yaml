@@ -239,8 +239,10 @@ outputs:
 
   - name: cuda-nvvm-tools
     files:
-      - nvvm/bin                            # [linux]
-      - nvvm/libdevice                      # [linux]
+      - nvvm/bin                # [linux]
+      - nvvm/libdevice          # [linux]
+      - Library\nvvm\bin        # [win]
+      - Library\nvvm\libdevice  # [win]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -256,6 +258,8 @@ outputs:
       commands:
         - test -d $PREFIX/nvvm                                    # [linux]
         - test -f $PREFIX/nvvm/bin/cicc                           # [linux]
+        - if not exist %LIBRARY_PREFIX%\nvvm\bin\cicc.exe exit 1  # [win]
+        - if not exist %LIBRARY_PREFIX%\nvvm\libdevice exit 1     # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
@@ -267,9 +271,8 @@ outputs:
       doc_url: https://docs.nvidia.com/cuda/index.html
 
   - name: cuda-nvvm-dev_{{ target_platform }}
-    files:
+    files:                              # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
-      - Library\nvvm                    # [win]
     requirements:
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
@@ -295,9 +298,11 @@ outputs:
     build:
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable
       binary_relocation: False
-    files:                             # [linux]
-      - nvvm/include                   # [linux]
-      - nvvm/lib64                     # [linux]
+    files:
+      - nvvm/include          # [linux]
+      - nvvm/lib64            # [linux]
+      - Library\nvvm\include  # [win]
+      - Library\nvvm\lib      # [win]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -313,6 +318,8 @@ outputs:
       commands:
         - test -d $PREFIX/nvvm/include  # [linux]
         - test -d $PREFIX/nvvm/lib64    # [linux]
+        - if not exist %LIBRARY_PREFIX%\nvvm\include exit 1  # [win]
+        - if not exist %LIBRARY_PREFIX%\nvvm\lib exit 1      # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
