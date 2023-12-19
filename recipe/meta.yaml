@@ -198,6 +198,7 @@ outputs:
       commands:
         - test -d $PREFIX/bin/crt            # [linux]
         - test -f $PREFIX/bin/crt/link.stub  # [linux]
+        - if not exist %LIBRARY_BIN%\crt\link.stub exit 1  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
@@ -216,7 +217,7 @@ outputs:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
     files:
       - targets/{{ target_name }}/include/crt  # [linux]
-      - Library\include\crt                   # [win]
+      - Library\include\crt                    # [win]
     requirements:
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
@@ -228,7 +229,6 @@ outputs:
     test:
       commands:
         - test -f $PREFIX/targets/{{ target_name }}/include/crt/common_functions.h  # [linux]
-        - if not exist %LIBRARY_BIN%\crt\link.stub exit 1           # [win]
         - if not exist %LIBRARY_INC%\crt\common_functions.h exit 1  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
