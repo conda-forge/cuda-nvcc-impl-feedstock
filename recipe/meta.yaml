@@ -183,8 +183,9 @@ outputs:
       doc_url: https://docs.nvidia.com/cuda/index.html
 
   - name: cuda-crt-tools
-    files:       # [linux]
-      - bin/crt  # [linux]
+    files:
+      - bin/crt          # [linux]
+      - Library\bin\crt  # [win]
     requirements:
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
@@ -215,7 +216,6 @@ outputs:
         - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
     files:
       - targets/{{ target_name }}/include/crt  # [linux]
-      - Library\bin\crt                        # [win]
       - Library\include\crt                   # [win]
     requirements:
       host:
