@@ -94,11 +94,11 @@ outputs:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-version {{ cuda_version }}
         - cuda-nvcc-tools {{ cuda_version }}
-        - cuda-crt_{{ target_platform }}
+        - cuda-crt-dev_{{ target_platform }}
         - libgcc-ng >=6                         # [linux]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - {{ pin_subpackage("cuda-crt_" + target_platform, exact=True) }}
+        - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - libgcc-ng >=6                         # [linux]
       run_constrained:
         - gcc_impl_{{ target_platform }} >=6,<13  # [linux]
@@ -207,7 +207,7 @@ outputs:
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
 
-  - name: cuda-crt_{{ target_platform }}
+  - name: cuda-crt-dev_{{ target_platform }}
     build:
       noarch: generic
     run_exports:
