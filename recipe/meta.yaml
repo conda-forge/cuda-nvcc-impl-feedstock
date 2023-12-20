@@ -1,6 +1,7 @@
 {% set name = "cuda-nvcc-impl" %}
 {% set version = "12.2.140" %}
 {% set cuda_version = "12.2" %}
+{% set cuda_version_next = cuda_version.split(".")[0]|int + 1 %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -72,7 +73,7 @@ outputs:
         - "*/api-ms-win-core-winrt-*.dll"        # [win]
     run_exports:
       strong:
-        - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
+        - cuda-version >={{ cuda_version }},<{{ cuda_version_next }}
     files:
       # targets/{{ target_name }}/bin/nvcc is only a symlink
       - targets/{{ target_name }}/bin          # [linux]
@@ -127,7 +128,7 @@ outputs:
       binary_relocation: False
     run_exports:
       strong:
-        - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
+        - cuda-version >={{ cuda_version }},<{{ cuda_version_next }}
     files:                             # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
     requirements:
@@ -211,7 +212,7 @@ outputs:
       noarch: generic
     run_exports:
       strong:
-        - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
+        - cuda-version >={{ cuda_version }},<{{ cuda_version_next }}
     files:
       - targets/{{ target_name }}/include/crt  # [linux]
       - Library\include\crt                    # [win]
