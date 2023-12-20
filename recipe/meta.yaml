@@ -201,9 +201,9 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
-      summary: CUDA internal headers.
+      summary: CUDA internal tools.
       description: |
-        CUDA internal headers.
+        CUDA internal tools.
       doc_url: https://docs.nvidia.com/cuda/index.html
 
   - name: cuda-crt-dev_{{ target_platform }}
