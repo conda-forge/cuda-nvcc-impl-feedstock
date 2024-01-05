@@ -272,6 +272,8 @@ outputs:
       doc_url: https://docs.nvidia.com/cuda/index.html
 
   - name: cuda-nvvm-dev_{{ target_platform }}
+    build:
+      noarch: generic
     files:                              # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
     requirements:
