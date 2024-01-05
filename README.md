@@ -18,6 +18,34 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 Compiler for CUDA applications.
 
 
+About cuda-crt-dev_linux-64
+---------------------------
+
+Home: https://developer.nvidia.com/cuda-toolkit
+
+Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+
+Summary: CUDA internal headers.
+
+Documentation: https://docs.nvidia.com/cuda/index.html
+
+CUDA internal headers.
+
+
+About cuda-crt-tools
+--------------------
+
+Home: https://developer.nvidia.com/cuda-toolkit
+
+Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+
+Summary: CUDA internal tools.
+
+Documentation: https://docs.nvidia.com/cuda/index.html
+
+CUDA internal tools.
+
+
 About cuda-nvcc-tools
 ---------------------
 
@@ -111,9 +139,17 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--crt--dev_linux--64-green.svg)](https://anaconda.org/conda-forge/cuda-crt-dev_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-crt-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-crt-dev_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-crt-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-crt-dev_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-crt-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-crt-dev_linux-64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--crt--tools-green.svg)](https://anaconda.org/conda-forge/cuda-crt-tools) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-crt-tools.svg)](https://anaconda.org/conda-forge/cuda-crt-tools) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-crt-tools.svg)](https://anaconda.org/conda-forge/cuda-crt-tools) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-crt-tools.svg)](https://anaconda.org/conda-forge/cuda-crt-tools) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvcc--dev_linux--64-green.svg)](https://anaconda.org/conda-forge/cuda-nvcc-dev_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvcc-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvcc-dev_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvcc-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvcc-dev_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvcc-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvcc-dev_linux-64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvcc--impl-green.svg)](https://anaconda.org/conda-forge/cuda-nvcc-impl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvcc-impl.svg)](https://anaconda.org/conda-forge/cuda-nvcc-impl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvcc-impl.svg)](https://anaconda.org/conda-forge/cuda-nvcc-impl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvcc-impl.svg)](https://anaconda.org/conda-forge/cuda-nvcc-impl) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvcc--tools-green.svg)](https://anaconda.org/conda-forge/cuda-nvcc-tools) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvcc-tools.svg)](https://anaconda.org/conda-forge/cuda-nvcc-tools) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvcc-tools.svg)](https://anaconda.org/conda-forge/cuda-nvcc-tools) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvcc-tools.svg)](https://anaconda.org/conda-forge/cuda-nvcc-tools) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--dev_linux--64-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-dev_linux-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--dev_linux--aarch64-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-aarch64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-dev_linux-aarch64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-aarch64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-dev_linux-aarch64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-aarch64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-dev_linux-aarch64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-aarch64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--dev_linux--ppc64le-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-ppc64le) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-dev_linux-ppc64le.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-ppc64le) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-dev_linux-ppc64le.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-ppc64le) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-dev_linux-ppc64le.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_linux-ppc64le) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--dev_win--64-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_win-64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-dev_win-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_win-64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-dev_win-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_win-64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-dev_win-64.svg)](https://anaconda.org/conda-forge/cuda-nvvm-dev_win-64) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--impl-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-impl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-impl.svg)](https://anaconda.org/conda-forge/cuda-nvvm-impl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-impl.svg)](https://anaconda.org/conda-forge/cuda-nvvm-impl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-impl.svg)](https://anaconda.org/conda-forge/cuda-nvvm-impl) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--nvvm--tools-green.svg)](https://anaconda.org/conda-forge/cuda-nvvm-tools) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-nvvm-tools.svg)](https://anaconda.org/conda-forge/cuda-nvvm-tools) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-nvvm-tools.svg)](https://anaconda.org/conda-forge/cuda-nvvm-tools) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-nvvm-tools.svg)](https://anaconda.org/conda-forge/cuda-nvvm-tools) |
 
 Installing cuda-nvcc-impl
 =========================
@@ -125,41 +161,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cuda-nvcc-dev_linux-64, cuda-nvcc-impl, cuda-nvcc-tools` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `cuda-crt-dev_linux-64, cuda-crt-tools, cuda-nvcc-dev_linux-64, cuda-nvcc-impl, cuda-nvcc-tools, cuda-nvvm-dev_linux-64, cuda-nvvm-dev_linux-aarch64, cuda-nvvm-dev_linux-ppc64le, cuda-nvvm-dev_win-64, cuda-nvvm-impl, cuda-nvvm-tools` can be installed with `conda`:
 
 ```
-conda install cuda-nvcc-dev_linux-64 cuda-nvcc-impl cuda-nvcc-tools
-```
-
-or with `mamba`:
-
-```
-mamba install cuda-nvcc-dev_linux-64 cuda-nvcc-impl cuda-nvcc-tools
-```
-
-It is possible to list all of the versions of `cuda-nvcc-dev_linux-64` available on your platform with `conda`:
-
-```
-conda search cuda-nvcc-dev_linux-64 --channel conda-forge
+conda install cuda-crt-dev_linux-64 cuda-crt-tools cuda-nvcc-dev_linux-64 cuda-nvcc-impl cuda-nvcc-tools cuda-nvvm-dev_linux-64 cuda-nvvm-dev_linux-aarch64 cuda-nvvm-dev_linux-ppc64le cuda-nvvm-dev_win-64 cuda-nvvm-impl cuda-nvvm-tools
 ```
 
 or with `mamba`:
 
 ```
-mamba search cuda-nvcc-dev_linux-64 --channel conda-forge
+mamba install cuda-crt-dev_linux-64 cuda-crt-tools cuda-nvcc-dev_linux-64 cuda-nvcc-impl cuda-nvcc-tools cuda-nvvm-dev_linux-64 cuda-nvvm-dev_linux-aarch64 cuda-nvvm-dev_linux-ppc64le cuda-nvvm-dev_win-64 cuda-nvvm-impl cuda-nvvm-tools
+```
+
+It is possible to list all of the versions of `cuda-crt-dev_linux-64` available on your platform with `conda`:
+
+```
+conda search cuda-crt-dev_linux-64 --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search cuda-crt-dev_linux-64 --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cuda-nvcc-dev_linux-64 --channel conda-forge
+mamba repoquery search cuda-crt-dev_linux-64 --channel conda-forge
 
-# List packages depending on `cuda-nvcc-dev_linux-64`:
-mamba repoquery whoneeds cuda-nvcc-dev_linux-64 --channel conda-forge
+# List packages depending on `cuda-crt-dev_linux-64`:
+mamba repoquery whoneeds cuda-crt-dev_linux-64 --channel conda-forge
 
-# List dependencies of `cuda-nvcc-dev_linux-64`:
-mamba repoquery depends cuda-nvcc-dev_linux-64 --channel conda-forge
+# List dependencies of `cuda-crt-dev_linux-64`:
+mamba repoquery depends cuda-crt-dev_linux-64 --channel conda-forge
 ```
 
 
