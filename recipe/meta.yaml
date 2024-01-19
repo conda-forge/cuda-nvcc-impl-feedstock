@@ -1,6 +1,6 @@
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.2.140" %}
-{% set cuda_version = "12.2" %}
+{% set version = "12.3.107" %}
+{% set cuda_version = "12.3" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -19,16 +19,16 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 3feaab191e1ae3fded02c02b0f24453069ada96b2e3a750251293b36079dc2f1  # [linux64]
-  sha256: cc515b95932445624a21bd179256dd7211c02000f543cc68fee6a99d735f137c  # [ppc64le]
-  sha256: 3e9df10648af47cd4b1b985be81da9e4706623b6dd6f640e53f6d8badd84c155  # [aarch64]
-  sha256: 140ca9c560f2fa4f6f7275d815d1d6fa6bbf08901a9bae48152f6c5e50c0bb1c  # [win]
+  sha256: 65dba017ed1dbbe819a6ccc1841a4add4dfbc652603aa89be773888e82a5629e  # [linux64]
+  sha256: 0a5caf3e0cfd44f3aaa235f861c98573ac735f550faf57bda199650551fa27f1  # [ppc64le]
+  sha256: 4c0e6a79a67fb86489be9e0976cc22127ca2ae160b1ad22ac4742d52f0ebe32d  # [aarch64]
+  sha256: 8398faefe86092b434d6be2f0b74addae639965217b8fb8f77099c8d75eb99df  # [win]
   patches:
     - nvcc.profile.patch      # [linux]
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [osx]
 
 outputs:
