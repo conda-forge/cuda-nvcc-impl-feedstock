@@ -28,7 +28,7 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx]
 
 outputs:
@@ -90,7 +90,7 @@ outputs:
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-version {{ cuda_version }}
-        - cuda-nvcc-tools {{ cuda_version }}
+        - {{ pin_subpackage("cuda-nvcc-tools", exact=True) }}
         - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
         - libgcc-ng >=6                         # [linux]
