@@ -2,7 +2,21 @@
 set -e
 set -x
 
-test_platform="linux-$(uname -p)"
+kernel_name="$(uname -s)"
+if [[ "${kernel_name}" != "Linux" ]]
+then
+  echo "Unknown OS. Expected Linux, but found ${kernel_name}"
+  exit 1
+fi
+
+processor_name="$(uname -m)"
+case "${processor_name}" in
+  "x86_64") test_platform="linux-64" ;;
+  "aarch64") test_platform="linux-aarch64" ;;
+  "ppc64le") test_platform="linux-ppc64le" ;;
+  *) echo "Unknown architecture: ${processor_name}" && exit 1 ;;
+esac
+
 if [[ "${test_platform}" != "${target_platform}" ]]
 then
   echo "Skipping NVCC testing as current platform is ${test_platform}, whereas; NVCC is built for ${target_platform}."
