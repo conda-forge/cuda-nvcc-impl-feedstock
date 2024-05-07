@@ -12,6 +12,8 @@
 {% set target_name = "x64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
+{% set exists = "which" %}  # [not win]
+{% set exists = "where" %}  # [win]
 
 package:
   name: cuda-nvcc-impl-split
@@ -28,7 +30,7 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx]
 
 outputs:
@@ -163,13 +165,13 @@ outputs:
       files:
         - test.cu
         - CMakeLists.txt
-        - run_cmake_cuda_tests.sh  # [linux]
+        - run_nvcc_tests.sh   # [linux]
+        - run_nvcc_tests.bat  # [win]
       commands:
         - test -L $PREFIX/lib/libnvptxcompiler_static.a  # [linux]
-        - nvcc --version
-        - nvcc --verbose test.cu
-        - cmake -S . -B ./build -G=Ninja && cmake --build ./build -v
-        - bash ./run_cmake_cuda_tests.sh  # [linux and (x86_64 or aarch64)]
+        - {{ exists }} nvcc
+        - ./run_nvcc_tests.sh   # [linux]
+        - .\run_nvcc_tests.bat  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
