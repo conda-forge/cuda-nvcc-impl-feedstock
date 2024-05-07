@@ -1,7 +1,27 @@
 #!/bin/bash
 set -e
 set -x
+
+test_platform="linux-$(uname -p)"
+if [[ "${test_platform}" != "${target_platform}" ]]
+then
+  echo "Skipping NVCC testing as current platform is ${test_platform}, whereas; NVCC is built for ${target_platform}."
+  exit 0
+fi
+
 cmake_version=$(cmake --version | grep version | awk '{print $3}')
+
+nvcc --version
+
+nvcc --verbose test.cu
+
+cmake -S . -B ./build -G=Ninja && cmake --build ./build -v
+
+if [[ "${target_platform}" == "linux-ppc64le" ]]
+then
+  echo "Skipping CMake tests on ${target_platform} due to known issues."
+  exit 0
+fi
 
 mkdir -p cmake-tests
 git clone -b v${cmake_version} --depth 1 https://gitlab.kitware.com/cmake/cmake.git cmake-tests

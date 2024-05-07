@@ -165,14 +165,13 @@ outputs:
       files:
         - test.cu
         - CMakeLists.txt
-        - run_cmake_cuda_tests.sh  # [linux]
+        - run_nvcc_tests.sh   # [linux]
+        - run_nvcc_tests.bat  # [win]
       commands:
         - test -L $PREFIX/lib/libnvptxcompiler_static.a  # [linux]
         - {{ exists }} nvcc
-        - nvcc --version                                              # [build_platform == target_platform]
-        - nvcc --verbose test.cu                                      # [build_platform == target_platform]
-        - cmake -S . -B ./build -G=Ninja && cmake --build ./build -v  # [build_platform == target_platform]
-        - bash ./run_cmake_cuda_tests.sh                              # [linux and (x86_64 or aarch64) and build_platform == target_platform]
+        - ./run_nvcc_tests.sh   # [linux]
+        - .\run_nvcc_tests.bat  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
