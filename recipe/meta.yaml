@@ -12,6 +12,8 @@
 {% set target_name = "x64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
+{% set exists = "which" %}  # [not win]
+{% set exists = "where" %}  # [win]
 
 package:
   name: cuda-nvcc-impl-split
@@ -166,6 +168,7 @@ outputs:
         - run_cmake_cuda_tests.sh  # [linux]
       commands:
         - test -L $PREFIX/lib/libnvptxcompiler_static.a  # [linux]
+        - {{ exists }} nvcc
         - nvcc --version
         - nvcc --verbose test.cu
         - cmake -S . -B ./build -G=Ninja && cmake --build ./build -v
