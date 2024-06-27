@@ -51,7 +51,7 @@ outputs:
         - {{ pin_subpackage("cuda-crt-tools", exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-tools", exact=True) }}
       run_constrained:
-        - gcc_impl_{{ target_platform }} >=6,<13.3a0  # [linux]
+        - gcc_impl_{{ target_platform }} >=6,<14.0a0  # [linux]
         - arm-variant * {{ arm_variant_type }}        # [aarch64]
     test:
       commands:
@@ -101,7 +101,7 @@ outputs:
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
         - libgcc-ng >=6                         # [linux]
       run_constrained:
-        - gcc_impl_{{ target_platform }} >=6,<13.3a0  # [linux]
+        - gcc_impl_{{ target_platform }} >=6,<14.0a0  # [linux]
         - arm-variant * {{ arm_variant_type }}        # [aarch64]
     test:
       commands:
@@ -147,7 +147,7 @@ outputs:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - cuda-cudart-dev
       run_constrained:
-        - gcc_impl_{{ target_platform }} >=6,<13.3a0  # [linux]
+        - gcc_impl_{{ target_platform }} >=6,<14.0a0  # [linux]
         - arm-variant * {{ arm_variant_type }}        # [aarch64]
         - vc >={{ VCVER }}                            # [win]
     test:
