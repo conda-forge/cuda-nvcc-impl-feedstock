@@ -1,12 +1,11 @@
 --- bin/nvcc.profile.bak	2024-03-12 15:52:23.511145665 +0000
 +++ bin/nvcc.profile	2024-03-12 16:27:28.806624738 +0000
-@@ -1,16 +1,16 @@
+@@ -1,15 +1,15 @@
  
 -TOP              = $(_HERE_)/..
 +TOP              = $(_HERE_)/../$(_TARGET_DIR_)
  
  CICC_PATH        = $(TOP)/nvvm/bin
- CICC_NEXT_PATH   = $(TOP)/nvvm-next/bin
  NVVMIR_LIBRARY_DIR = $(TOP)/nvvm/libdevice
  
  LD_LIBRARY_PATH += $(TOP)/lib:
