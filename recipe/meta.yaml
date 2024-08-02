@@ -135,8 +135,6 @@ outputs:
     files:                             # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
     requirements:
-      build:
-        - {{ stdlib("c") }}
       host:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-version {{ cuda_version }}
@@ -156,6 +154,7 @@ outputs:
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
+        - {{ stdlib("c") }}
         - gxx              # [linux]
         - gcc              # [linux]
         - vs{{ VSYEAR }}_win-64 =={{ CL_VERSION }}  # [win]
