@@ -1,5 +1,5 @@
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.6.20" %}
+{% set version = "12.6.68" %}
 {% set cuda_version = "12.6" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set gcc_min_constraint = ">=6" %}
@@ -23,9 +23,9 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 4336a230269db14336ca1f727a0502631390a52d37c17d3bde05ccda5d534406  # [linux64]
-  sha256: 06112bf1cc0cfb6b881a2e0420cb4611b6d701decbb195fbfb4f0e9966a42006  # [aarch64]
-  sha256: 03282a36fb98c2f227877a62efd04c36b1ab01fb1b676d9edbd0b10179e0a40a  # [win]
+  sha256: b672d0c36a27ea4577536725713064c9daa5d7378ac85877bc847ca9a46b2645  # [linux64]
+  sha256: f895c416e195240a9b89790bffc7a905adf2f33f817c19c081f9cbf44bc67f85  # [aarch64]
+  sha256: 03ef603c9d69a03861e7f021d46ef2932581d3ed8fee75e9b1a4788f22a1aea2  # [win]
   patches:
     - nvcc.profile.patch      # [linux]
     - nvcc.profile.patch.win  # [win]
