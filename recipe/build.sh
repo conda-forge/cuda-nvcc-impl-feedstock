@@ -16,6 +16,18 @@ for i in `ls`; do
         mkdir -p ${PREFIX}/${targetsDir}
         mkdir -p ${PREFIX}/$i
         if [[ $i == "bin" ]]; then
+            for j in `ls "${i}"`; do
+		[[ -f "bin/${j}" ]] || continue
+
+		if grep -qx "${j}" ${RECIPE_DIR}/patchelf_exclude.txt; then
+		    echo "Skipping bin/${j} as it is in the patchelf exclusion list."
+		    continue
+		fi
+
+                echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}" ...
+                patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}"
+            done
+
             mkdir -p ${PREFIX}/${targetsDir}/bin
             cp -rv $i ${PREFIX}
             ln -sv ${PREFIX}/bin/nvcc ${PREFIX}/${targetsDir}/bin/nvcc
