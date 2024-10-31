@@ -31,7 +31,8 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 1
+  number: 2
+  binary_relocation: false
   skip: true  # [osx or ppc64le]
 
 outputs:
@@ -56,9 +57,15 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
+      requires:
+        - patchelf                                                # [linux]
+      files:
+        - patchelf_exclude.txt                                    # [linux]
+        - test-rpath.sh                                           # [linux]
       commands:
         - test -f $PREFIX/bin/nvcc                                # [linux]
         - test -f $PREFIX/bin/ptxas                               # [linux]
+        - bash test-rpath.sh                                      # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
