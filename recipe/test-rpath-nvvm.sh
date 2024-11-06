@@ -6,9 +6,20 @@
 
 errors=""
 
-for item in `find ${PREFIX}/nvvm/bin -type f`; do
+dirs=()
+[[ -d ${PREFIX}/nvvm/bin ]] && dirs+=(${PREFIX}/nvvm/bin)
+[[ -d ${PREFIX}/nvvm/lib64 ]] && dirs+=(${PREFIX}/nvvm/lib64)
+
+if [[ ${#dirs[@]} == 0 ]]; then
+    echo "There is nothing to test. Returning."
+    exit
+fi
+
+for item in `find ${dirs[@]} -type f`; do
+    [[ -L $item ]] && continue
+
+    echo "Artifact to test: ${item}"
     filename=$(basename "${item}")
-    echo "Artifact to test: ${filename}"
 
     pkg_info=$(conda package -w "${item}")
     echo "\$PKG_NAME: ${PKG_NAME}"
@@ -26,9 +37,8 @@ for item in `find ${PREFIX}/nvvm/bin -type f`; do
 
     if [[ ${item} =~ /nvvm/bin/ && $rpath != "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" ]]; then
         errors+="${item}\n"
-    # lib64/libnvvm.so patching is being skipped so let's not test it
-    #elif [[ ${item} =~ nvvm/lib64/ && $rpath != "\$ORIGIN" ]]; then
-    #    errors+="${item}\n"
+    elif [[ ${item} =~ nvvm/lib64/ && $rpath != "\$ORIGIN" ]]; then
+        errors+="${item}\n"
     elif [[ $(objdump -x ${item} | grep "PATH") == *"RUNPATH"* ]]; then
         errors+="${item}\n"
     fi

@@ -334,9 +334,14 @@ outputs:
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
+      requires:
+        - patchelf                                                # [linux]
+      files:
+        - test-rpath-nvvm.sh                                      # [linux]
       commands:
         - test -d $PREFIX/nvvm/include  # [linux]
         - test -d $PREFIX/nvvm/lib64    # [linux]
+        - bash test-rpath-nvvm.sh       # [linux]
         - if not exist %LIBRARY_PREFIX%\nvvm\include exit 1  # [win]
         - if not exist %LIBRARY_PREFIX%\nvvm\lib exit 1      # [win]
     about:

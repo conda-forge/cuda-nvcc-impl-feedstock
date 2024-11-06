@@ -46,11 +46,9 @@ for i in `ls`; do
                     # Adds the following paths relative to `$PREFIX` to the `RPATH`: `nvvm/lib64`, `lib`, `${targetsDir}/lib`
                     echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}" ...
                     patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}"
-
-                # Do not patch libnvvm.so for now as it gets corrupted by patchelf. See build.sh for details
-                #elif [[ "${j}" =~ /lib.*/.*\.so($|\.) && ! -L "${j}" ]]; then
-                #    echo patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}" ...
-                #    patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}"
+                elif [[ "${j}" =~ /lib.*/.*\.so($|\.) && ! -L "${j}" ]]; then
+                    echo patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}" ...
+                    patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}"
                 fi
             done
 
