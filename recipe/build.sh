@@ -43,6 +43,7 @@ for i in `ls`; do
         elif [[ $i == "nvvm" ]]; then
             for j in `find "${i}"`; do
                 if [[ "${j}" =~ /bin/.*$ ]]; then
+                    # Adds the following paths relative to `$PREFIX` to the `RPATH`: `nvvm/lib64`, `lib`, `${targetsDir}/lib`
                     echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}" ...
                     patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}"
 
