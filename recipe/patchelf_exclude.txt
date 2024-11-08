@@ -1,0 +1,4 @@
+crt/link.stub
+crt/prelink.stub
+nvcc.profile
+patchelf

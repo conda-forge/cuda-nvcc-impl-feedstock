@@ -31,7 +31,8 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 1
+  number: 2
+  binary_relocation: false
   skip: true  # [osx or ppc64le]
 
 outputs:
@@ -56,9 +57,15 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
+      requires:
+        - patchelf                                                # [linux]
+      files:
+        - patchelf_exclude.txt                                    # [linux]
+        - test-rpath-nvcc.sh                                      # [linux]
       commands:
         - test -f $PREFIX/bin/nvcc                                # [linux]
         - test -f $PREFIX/bin/ptxas                               # [linux]
+        - bash test-rpath-nvcc.sh                                 # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
@@ -259,9 +266,14 @@ outputs:
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
+      requires:
+        - patchelf                                                # [linux]
+      files:
+        - test-rpath-nvvm.sh                                      # [linux]
       commands:
         - test -d $PREFIX/nvvm                                    # [linux]
         - test -f $PREFIX/nvvm/bin/cicc                           # [linux]
+        - bash test-rpath-nvvm.sh                                 # [linux]
         - if not exist %LIBRARY_PREFIX%\nvvm\bin\cicc.exe exit 1  # [win]
         - if not exist %LIBRARY_PREFIX%\nvvm\libdevice exit 1     # [win]
     about:
@@ -322,9 +334,14 @@ outputs:
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
+      requires:
+        - patchelf                                                # [linux]
+      files:
+        - test-rpath-nvvm.sh                                      # [linux]
       commands:
         - test -d $PREFIX/nvvm/include  # [linux]
         - test -d $PREFIX/nvvm/lib64    # [linux]
+        - bash test-rpath-nvvm.sh       # [linux]
         - if not exist %LIBRARY_PREFIX%\nvvm\include exit 1  # [win]
         - if not exist %LIBRARY_PREFIX%\nvvm\lib exit 1      # [win]
     about:

@@ -16,6 +16,18 @@ for i in `ls`; do
         mkdir -p ${PREFIX}/${targetsDir}
         mkdir -p ${PREFIX}/$i
         if [[ $i == "bin" ]]; then
+            for j in `ls "${i}"`; do
+                [[ -f "bin/${j}" ]] || continue
+
+                if grep -qx "${j}" ${RECIPE_DIR}/patchelf_exclude.txt; then
+                    echo "Skipping bin/${j} as it is in the patchelf exclusion list."
+                    continue
+                fi
+
+                echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}" ...
+                patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}"
+            done
+
             mkdir -p ${PREFIX}/${targetsDir}/bin
             cp -rv $i ${PREFIX}
             ln -sv ${PREFIX}/bin/nvcc ${PREFIX}/${targetsDir}/bin/nvcc
@@ -29,6 +41,17 @@ for i in `ls`; do
         elif [[ $i == "include" ]]; then
             cp -rv $i ${PREFIX}/${targetsDir}
         elif [[ $i == "nvvm" ]]; then
+            for j in `find "${i}"`; do
+                if [[ "${j}" =~ /bin/.*$ ]]; then
+                    # Adds the following paths relative to `$PREFIX` to the `RPATH`: `nvvm/lib64`, `lib`, `${targetsDir}/lib`
+                    echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}" ...
+                    patchelf --force-rpath --set-rpath "\$ORIGIN/../lib64:\$ORIGIN/../../lib:\$ORIGIN/../../${targetsDir}/lib" "${j}"
+                elif [[ "${j}" =~ /lib.*/.*\.so($|\.) && ! -L "${j}" ]]; then
+                    echo patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}" ...
+                    patchelf --force-rpath --set-rpath "\$ORIGIN" "${j}"
+                fi
+            done
+
             cp -rv $i ${PREFIX}
             ln -sv ${PREFIX}/nvvm ${PREFIX}/${targetsDir}/nvvm
         fi
