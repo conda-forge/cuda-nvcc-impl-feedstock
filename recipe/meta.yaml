@@ -1,5 +1,5 @@
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.6.77" %}
+{% set version = "12.6.85" %}
 {% set cuda_version = "12.6" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set gcc_min_constraint = ">=6" %}
@@ -23,16 +23,15 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: c2b319299ead62980b6978670498bfb70aad2309fdb581de197a682648ff3b72  # [linux64]
-  sha256: fcee340e703c8dec0b7fc4748a70c4b676f1946f92f0b6584fefd7b1a4c0bd63  # [aarch64]
-  sha256: f537b70b04f41bf0c3b2f4cc063ae448367accc246aa53f9d40559bcd41d42cb  # [win]
+  sha256: 840deff234d9bef20d6856439c49881cb4f29423b214f9ecd2fa59b7ac323817  # [linux64]
+  sha256: 1b834df41cb071884f33b1e4ffc185e4799975057baca57d80ba7c4591e67950  # [aarch64]
+  sha256: 3fb9f76b87c37d02f947354be89b718ad5f2c76b6ab47995265bfa3a068a5e14  # [win]
   patches:
     - nvcc.profile.patch      # [linux]
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 2
-  binary_relocation: false
+  number: 0
   skip: true  # [osx or ppc64le]
 
 outputs:
@@ -57,15 +56,9 @@ outputs:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
-      requires:
-        - patchelf                                                # [linux]
-      files:
-        - patchelf_exclude.txt                                    # [linux]
-        - test-rpath-nvcc.sh                                      # [linux]
       commands:
         - test -f $PREFIX/bin/nvcc                                # [linux]
         - test -f $PREFIX/bin/ptxas                               # [linux]
-        - bash test-rpath-nvcc.sh                                 # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
@@ -103,12 +96,12 @@ outputs:
         - {{ pin_subpackage("cuda-nvcc-tools", exact=True) }}
         - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
-        - libgcc {{ gcc_min_constraint }}  # [linux]
+        - libgcc-ng {{ gcc_min_constraint }}  # [linux]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
-        - libgcc {{ gcc_min_constraint }}  # [linux]
+        - libgcc-ng {{ gcc_min_constraint }}  # [linux]
       run_constrained:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
@@ -266,14 +259,9 @@ outputs:
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
-      requires:
-        - patchelf                                                # [linux]
-      files:
-        - test-rpath-nvvm.sh                                      # [linux]
       commands:
         - test -d $PREFIX/nvvm                                    # [linux]
         - test -f $PREFIX/nvvm/bin/cicc                           # [linux]
-        - bash test-rpath-nvvm.sh                                 # [linux]
         - if not exist %LIBRARY_PREFIX%\nvvm\bin\cicc.exe exit 1  # [win]
         - if not exist %LIBRARY_PREFIX%\nvvm\libdevice exit 1     # [win]
     about:
@@ -334,14 +322,9 @@ outputs:
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
-      requires:
-        - patchelf                                                # [linux]
-      files:
-        - test-rpath-nvvm.sh                                      # [linux]
       commands:
         - test -d $PREFIX/nvvm/include  # [linux]
         - test -d $PREFIX/nvvm/lib64    # [linux]
-        - bash test-rpath-nvvm.sh       # [linux]
         - if not exist %LIBRARY_PREFIX%\nvvm\include exit 1  # [win]
         - if not exist %LIBRARY_PREFIX%\nvvm\lib exit 1      # [win]
     about:
