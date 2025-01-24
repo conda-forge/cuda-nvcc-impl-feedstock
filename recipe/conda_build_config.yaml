@@ -4,10 +4,10 @@ cxx_compiler_version:      # [linux]
   - 12                     # [linux]
 arm_variant_type:  # [aarch64]
   - sbsa           # [aarch64]
+VCVER:
+  - 14.2
 VSYEAR:
   - 2019
-VSVER:
-  - 16
 CL_VERSION:
   - 19.29.30139
   
