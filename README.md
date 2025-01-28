@@ -99,10 +99,17 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64</td>
+              <td>linux_aarch64_arm_variant_typesbsac_stdlib_version2.17</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19442&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-nvcc-impl-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-nvcc-impl-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_arm_variant_typesbsac_stdlib_version2.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_arm_variant_typetegrac_stdlib_version2.34</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19442&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-nvcc-impl-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_arm_variant_typetegrac_stdlib_version2.34" alt="variant">
                 </a>
               </td>
             </tr><tr>

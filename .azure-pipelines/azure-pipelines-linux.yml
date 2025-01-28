@@ -11,11 +11,15 @@ jobs:
       linux_64_:
         CONFIG: linux_64_
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_:
-        CONFIG: linux_aarch64_
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_arm_variant_typesbsac_stdlib_version2.17:
+        CONFIG: linux_aarch64_arm_variant_typesbsac_stdlib_version2.17
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_arm_variant_typetegrac_stdlib_version2.34:
+        CONFIG: linux_aarch64_arm_variant_typetegrac_stdlib_version2.34
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
   timeoutInMinutes: 360
   variables: {}
 
