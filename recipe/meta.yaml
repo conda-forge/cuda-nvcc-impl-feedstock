@@ -42,8 +42,8 @@ build:
 requirements:
   build:
     - {{ stdlib("c") }}
-    - cf-nvidia-tools
-    - patchelf
+    - cf-nvidia-tools  # [linux]
+    - patchelf  # [linux]
 
 outputs:
   - name: cuda-nvcc-tools
