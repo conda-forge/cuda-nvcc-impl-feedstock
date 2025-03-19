@@ -37,6 +37,10 @@ build:
   binary_relocation: false
   skip: true  # [osx or ppc64le]
 
+requirements:
+  build:
+    - cf-nvidia-tools 1.*
+
 outputs:
   - name: cuda-nvcc-tools
     files:   # [linux]
