@@ -2,17 +2,19 @@ c_compiler_version:        # [linux]
   - 12                     # [linux]
 cxx_compiler_version:      # [linux]
   - 12                     # [linux]
-arm_variant_type:  # [aarch64]
-  - sbsa           # [aarch64]
-VCVER:
-  - 14.2
-VSYEAR:
-  - 2019
-CL_VERSION:
-  - 19.29.30139
+
+arm_variant_type:          # [aarch64]
+  - sbsa                   # [aarch64]
+
+VCVER:                     # [win]
+  - 14.2                   # [win]
+VSYEAR:                    # [win]
+  - 2019                   # [win] 
+CL_VERSION:                # [win]
+  - 19.29.30139            # [win]
   
-zip_keys:
-  -
-    - VCVER
-    - VSYEAR
-    - CL_VERSION
+zip_keys:                  # [win]
+  -                        # [win]
+    - VCVER                # [win]
+    - VSYEAR               # [win]
+    - CL_VERSION           # [win]
