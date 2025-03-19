@@ -2,8 +2,8 @@ c_compiler_version:        # [linux]
   - 12                     # [linux]
 cxx_compiler_version:      # [linux]
   - 12                     # [linux]
-arm_variant_type:  # [aarch64]
-  - sbsa           # [aarch64]
+arm_variant_type:          # [aarch64]
+  - sbsa                   # [aarch64]
 VCVER:
   - 14.2
 VSYEAR:
