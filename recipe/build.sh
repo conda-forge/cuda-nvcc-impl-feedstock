@@ -69,3 +69,5 @@ done
 #     mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
 #     cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/~cuda-nvcc_${CHANGE}.sh"
 # done
+
+check-glibc $PREFIX/nvvm/*/*.so.*

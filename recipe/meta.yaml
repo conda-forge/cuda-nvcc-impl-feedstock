@@ -1,3 +1,5 @@
+{% set gcc_constraint = ">=6,<15.0a0" %}
+{% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
 {% set version = "12.8.93" %}
 {% set cuda_version = "12.8" %}
@@ -31,13 +33,17 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 0
+  number: 1
   binary_relocation: false
   skip: true  # [osx or ppc64le]
 
+requirements:
+  build:
+    - cf-nvidia-tools 1.*  # [linux]
+
 outputs:
   - name: cuda-nvcc-tools
-    files:                                  # [linux]
+    files:   # [linux]
       - bin/*                               # [linux]
     requirements:
       build:
@@ -79,7 +85,7 @@ outputs:
   - name: cuda-nvcc-dev_{{ target_platform }}
     build:
       noarch: generic
-      missing_dso_whitelist:                     # [win]
+      missing_dso_whitelist:   # [win]
         - "*/api-ms-win-core-winrt-*.dll"        # [win]
     run_exports:
       strong:
@@ -135,11 +141,11 @@ outputs:
   - name: cuda-nvcc-impl
     build:
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable
-      binary_relocation: False
+      binary_relocation: false
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version_next_major }}
-    files:                             # [linux]
+    files:   # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
     requirements:
       host:
@@ -289,7 +295,7 @@ outputs:
   - name: cuda-nvvm-dev_{{ target_platform }}
     build:
       noarch: generic
-    files:                              # [linux]
+    files:   # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
     requirements:
       host:
@@ -315,7 +321,7 @@ outputs:
   - name: cuda-nvvm-impl
     build:
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable.
-      binary_relocation: False
+      binary_relocation: false
     files:
       - nvvm/include          # [linux]
       - nvvm/lib64            # [linux]
