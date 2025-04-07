@@ -43,8 +43,6 @@ build:
 
 requirements:
   build:
-    - {{ stdlib("c") }}
-    - cf-nvidia-tools  # [linux]
     - patchelf  # [linux]
     - cf-nvidia-tools 1.*  # [linux]
 
