@@ -1,5 +1,7 @@
+{% set gcc_constraint = ">=6,<15.0a0" %}
+{% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.8.61" %}
+{% set version = "12.8.93" %}
 {% set cuda_version = "12.8" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set gcc_min_constraint = ">=6" %}
@@ -18,10 +20,10 @@
 {% set extension = "zip" %}  # [win]
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
-{% set sha256 = "145f8779bd56bdfa214447e5cb1b3a206ec1b7398da460e257f2898fd8604c54" %}  # [linux64]
-{% set sha256 = "03f998e7d6c820479b18397276ac9067f4f757b0f94daec64454fdda373eb272" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set sha256 = "a02498cc0a4d3571587ac249185f6bdf3095dbead75cc3c3b2f11443c67b0255" %}  # [aarch64 and arm_variant_type == "tegra"]
-{% set sha256 = "d0158c4dd6565c0c9bca50d2e0bd5fd944d40333725a1c6875ef1840b719abfc" %}  # [win]
+{% set sha256 = "9961b3484b6b71314063709a4f9529654f96782ad39e72bf1e00f070db8210d3" %}  # [linux64]
+{% set sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
@@ -44,10 +46,11 @@ requirements:
     - {{ stdlib("c") }}
     - cf-nvidia-tools  # [linux]
     - patchelf  # [linux]
+    - cf-nvidia-tools 1.*  # [linux]
 
 outputs:
   - name: cuda-nvcc-tools
-    files:                                  # [linux]
+    files:   # [linux]
       - bin/*                               # [linux]
     requirements:
       build:
@@ -88,7 +91,7 @@ outputs:
   - name: cuda-nvcc-dev_{{ target_platform }}
     build:
       noarch: generic
-      missing_dso_whitelist:                     # [win]
+      missing_dso_whitelist:   # [win]
         - "*/api-ms-win-core-winrt-*.dll"        # [win]
     run_exports:
       strong:
@@ -143,11 +146,11 @@ outputs:
   - name: cuda-nvcc-impl
     build:
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable
-      binary_relocation: False
+      binary_relocation: false
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version_next_major }}
-    files:                             # [linux]
+    files:   # [linux]
       - lib/libnvptxcompiler_static.a  # [linux]
     requirements:
       host:
@@ -290,7 +293,7 @@ outputs:
   - name: cuda-nvvm-dev_{{ target_platform }}
     build:
       noarch: generic
-    files:                              # [linux]
+    files:   # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
     requirements:
       host:
@@ -314,7 +317,7 @@ outputs:
   - name: cuda-nvvm-impl
     build:
       # libnvvm.so gets corrupted by patchelf. No need to relocate as it is already relocatable.
-      binary_relocation: False
+      binary_relocation: false
     files:
       - nvvm/include          # [linux]
       - nvvm/lib64            # [linux]
