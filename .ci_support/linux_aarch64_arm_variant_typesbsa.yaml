@@ -25,5 +25,7 @@ target_platform:
 xz:
 - '5'
 zip_keys:
+- - arm_variant_type
+  - c_stdlib_version
 - - c_compiler_version
   - cxx_compiler_version

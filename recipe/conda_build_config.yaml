@@ -2,19 +2,27 @@ c_compiler_version:        # [linux]
   - 12                     # [linux]
 cxx_compiler_version:      # [linux]
   - 12                     # [linux]
+# For some reason, the minimum glibc version for tegra is much higher than sbsa
+c_stdlib_version:  # [linux and aarch64]
+  - "2.17"  # [linux and aarch64]
+  - "2.34"  # [linux and aarch64]
 
-arm_variant_type:          # [aarch64]
-  - sbsa                   # [aarch64]
+arm_variant_type:  # [linux and aarch64]
+  - sbsa           # [linux and aarch64]
+  - tegra          # [linux and aarch64]
 
 VCVER:                     # [win]
   - 14.2                   # [win]
 VSYEAR:                    # [win]
-  - 2019                   # [win] 
+  - 2019                   # [win]
 CL_VERSION:                # [win]
   - 19.29.30139            # [win]
-  
-zip_keys:                  # [win]
+
+zip_keys:
   -                        # [win]
     - VCVER                # [win]
     - VSYEAR               # [win]
     - CL_VERSION           # [win]
+  -                     # [linux and aarch64]
+    - arm_variant_type  # [linux and aarch64]
+    - c_stdlib_version  # [linux and aarch64]

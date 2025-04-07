@@ -8,16 +8,22 @@
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
-{% set platform = "linux-sbsa" %}  # [aarch64]
+{% set platform = "linux-sbsa" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set platform = "linux-aarch64" %}  # [aarch64 and arm_variant_type == "tegra"]
 {% set platform = "windows-x86_64" %}  # [win]
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
-{% set target_name = "sbsa-linux" %}  # [aarch64]
+{% set target_name = "sbsa-linux" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set target_name = "aarch64-linux" %}  # [aarch64 and arm_variant_type == "tegra"]
 {% set target_name = "x64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
+{% set sha256 = "9961b3484b6b71314063709a4f9529654f96782ad39e72bf1e00f070db8210d3" %}  # [linux64]
+{% set sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
@@ -25,20 +31,19 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 9961b3484b6b71314063709a4f9529654f96782ad39e72bf1e00f070db8210d3  # [linux64]
-  sha256: dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467  # [aarch64]
-  sha256: 9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391  # [win]
+  sha256: {{ sha256 }}
   patches:
     - nvcc.profile.patch      # [linux]
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 1
+  number: 2
   binary_relocation: false
   skip: true  # [osx or ppc64le]
 
 requirements:
   build:
+    - patchelf  # [linux]
     - cf-nvidia-tools 1.*  # [linux]
 
 outputs:
@@ -61,7 +66,6 @@ outputs:
         - {{ pin_subpackage("cuda-nvvm-tools", exact=True) }}
       run_constrained:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
-        - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       requires:
         - patchelf                                                # [linux]
@@ -117,7 +121,6 @@ outputs:
         - libgcc {{ gcc_min_constraint }}  # [linux]
       run_constrained:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
-        - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       commands:
         - test -L $PREFIX/targets/{{ target_name }}/bin/nvcc      # [linux]
@@ -161,7 +164,6 @@ outputs:
         - cuda-cudart-dev
       run_constrained:
         - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
-        - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - vc >={{ VCVER }}                      # [win]
     test:
       requires:
@@ -205,8 +207,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
-        - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       commands:
         - test -d $PREFIX/bin/crt            # [linux]
@@ -237,8 +237,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
-        - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       commands:
         - test -f $PREFIX/targets/{{ target_name }}/include/crt/common_functions.h  # [linux]
@@ -269,8 +267,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
-        - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       requires:
         - patchelf                                                # [linux]
@@ -303,8 +299,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
-        - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       commands:
         - test -L $PREFIX/targets/{{ target_name }}/nvvm          # [linux]
@@ -337,8 +331,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
-        - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       requires:
         - patchelf                                                # [linux]
