@@ -37,7 +37,7 @@ source:
     - nvcc.profile.patch.win  # [win]
 
 build:
-  number: 2
+  number: 3
   binary_relocation: false
   skip: true  # [osx or ppc64le]
 
