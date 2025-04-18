@@ -1,10 +1,9 @@
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.8.93" %}
+{% set version = "12.8.61" %}
 {% set cuda_version = "12.8" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
-{% set gcc_min_constraint = ">=6" %}
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -20,24 +19,53 @@
 {% set extension = "zip" %}  # [win]
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
-{% set sha256 = "9961b3484b6b71314063709a4f9529654f96782ad39e72bf1e00f070db8210d3" %}  # [linux64]
-{% set sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+
+{% set nvcc_sha256 = "6276180e7e203dfb230aa0cc5954096bafbaff2e03d875ef3d68cff5a7fd179d" %}  # [linux64]
+{% set nvcc_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvcc_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set nvcc_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+
+{% set crt_sha256 = "d2cb58eed6762393b3df623c47649acc2e4fa6238f5ca3ec6d1d66c0df6e9f59" %}  # [linux64]
+{% set crt_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set crt_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set crt_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+
+{% set nvvm_sha256 = "b8728a1ecd5dc7abfd3237e0caf7644f0b9533d64bbc7da3839a0214318caa55" %}  # [linux64]
+{% set nvvm_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvvm_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set nvvm_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+
+{% set libnvptxcompiler_sha256 = "f6eefbdf76096a98948a037e05c3b0ab289066f97041ec140ebf8d0e5ce878f2" %}  # [linux64]
+{% set libnvptxcompiler_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set libnvptxcompiler_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
+{% set libnvptxcompiler_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
   version: {{ version }}
 
 source:
-  url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: {{ sha256 }}
-  patches:
-    - nvcc.profile.patch      # [linux]
-    - nvcc.profile.patch.win  # [win]
+  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
+    sha256: {{ nvcc_sha256 }}
+    folder: nvcc
+    patches:
+      - nvcc.profile.patch      # [linux]
+      - nvcc.profile.patch.win  # [win]
+
+  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_crt/{{ platform }}/cuda_crt-{{ platform }}-{{ version }}-archive.{{ extension }}
+    folder: crt
+    sha256: {{ crt_sha256 }}
+
+  - url: https://developer.download.nvidia.com/compute/cuda/redist/libnvvm/{{ platform }}/libnvvm-{{ platform }}-{{ version }}-archive.{{ extension }}
+    folder: nvvm
+    sha256: {{ nvvm_sha256 }}
+
+  - url: https://developer.download.nvidia.com/compute/cuda/redist/libnvptxcompiler/{{ platform }}/libnvptxcompiler-{{ platform }}-{{ version }}-archive.{{ extension }}
+    folder: libnvptxcompiler
+    sha256: {{ libnvptxcompiler_sha256 }}
 
 build:
-  number: 3
+  number: 0
   binary_relocation: false
   skip: true  # [osx or ppc64le]
 
@@ -49,7 +77,14 @@ requirements:
 outputs:
   - name: cuda-nvcc-tools
     files:   # [linux]
-      - bin/*                               # [linux]
+      - bin/__nvcc_device_query  # [linux]
+      - bin/bin2c                # [linux]
+      - bin/cudafe++             # [linux]
+      - bin/fatbinary            # [linux]
+      - bin/nvcc                 # [linux]
+      - bin/nvcc.profile         # [linux]
+      - bin/nvlink               # [linux]
+      - bin/ptxas                # [linux]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -79,7 +114,7 @@ outputs:
         - bash test-rpath-nvcc.sh                                 # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvcc/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Architecture independent part of CUDA NVCC compiler.
@@ -96,15 +131,11 @@ outputs:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version_next_major }}
     files:
-      # targets/{{ target_name }}/bin/nvcc is only a symlink
-      - targets/{{ target_name }}/bin          # [linux]
-      - targets/{{ target_name }}/include/*.h  # [linux]
-      - targets/{{ target_name }}/lib         # [linux]
+      - targets/{{ target_name }}/bin/nvcc                          # [linux]
+      - targets/{{ target_name }}/include/fatbinary_section.h       # [linux]
       - Library\bin\*.exe                     # [win]
       - Library\bin\nvcc.profile              # [win]
       - Library\include\fatbinary_section.h   # [win]
-      - Library\include\nvPTXCompiler.h       # [win]
-      - Library\lib\nvptxcompiler_static.lib  # [win]
     requirements:
       build:
         - {{ stdlib("c") }}
@@ -112,6 +143,7 @@ outputs:
         - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvcc-tools", exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
+        - {{ pin_subpackage("libnvptxcompiler-dev_" + target_platform, exact=True) }}
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-version {{ cuda_version }}
         - libgcc {{ gcc_min_constraint }}  # [linux]
@@ -119,6 +151,7 @@ outputs:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - {{ pin_subpackage("cuda-crt-dev_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvvm-dev_" + target_platform, exact=True) }}
+        - {{ pin_subpackage("libnvptxcompiler-dev_" + target_platform, exact=True) }}
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
         - libgcc {{ gcc_min_constraint }}  # [linux]
       run_constrained:
@@ -126,19 +159,47 @@ outputs:
     test:
       commands:
         - test -L $PREFIX/targets/{{ target_name }}/bin/nvcc      # [linux]
-        - test -f $PREFIX/targets/{{ target_name }}/lib/libnvptxcompiler_static.a     # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/include/fatbinary_section.h       # [linux]
-        - test -f $PREFIX/targets/{{ target_name }}/include/nvPTXCompiler.h           # [linux]
         - if not exist %LIBRARY_BIN%\nvcc.exe exit 1                  # [win]
         - if not exist %LIBRARY_BIN%\nvcc.profile exit 1              # [win]
-        - if not exist %LIBRARY_LIB%\nvptxcompiler_static.lib exit 1  # [win]
-        - if not exist %LIBRARY_INC%\nvPTXCompiler.h exit 1           # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvcc/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Target architecture dependent parts of CUDA NVCC compiler.
+      description: |
+        Compiler for CUDA applications.
+      doc_url: https://docs.nvidia.com/cuda/index.html
+
+  - name: libnvptxcompiler-dev_{{ target_platform }}
+    build:
+      noarch: generic
+    files:
+      - targets/{{ target_name }}/include/nvPTXCompiler.h           # [linux]
+      - targets/{{ target_name }}/lib/libnvptxcompiler_static.a     # [linux]
+      - lib/libnvptxcompiler_static.a                               # [linux]
+      - Library\include\nvPTXCompiler.h                             # [win]
+      - Library\lib\nvptxcompiler_static.lib                        # [win]
+    requirements:
+      host:
+        - cuda-version {{ cuda_version }}
+      run:
+        - {{ pin_compatible("cuda-version", max_pin="x.x") }}
+        - arm-variant * {{ arm_variant_type }}    # [aarch64]
+    test:
+      commands:
+        - test -f $PREFIX/targets/{{ target_name }}/lib/libnvptxcompiler_static.a     # [linux]
+        - test -f $PREFIX/targets/{{ target_name }}/include/nvPTXCompiler.h           # [linux]
+        - test -L $PREFIX/lib/libnvptxcompiler_static.a                               # [linux]
+        - if not exist %LIBRARY_LIB%\nvptxcompiler_static.lib exit 1                  # [win]
+        - if not exist %LIBRARY_INC%\nvPTXCompiler.h exit 1                           # [win]
+    about:
+      home: https://developer.nvidia.com/cuda-toolkit
+      license_file: libnvptxcompiler/LICENSE
+      license: LicenseRef-NVIDIA-End-User-License-Agreement
+      license_url: https://docs.nvidia.com/cuda/eula/index.html
+      summary: Target architecture dependent parts of CUDA nvptxcompiler.
       description: |
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
@@ -150,8 +211,6 @@ outputs:
     run_exports:
       strong:
         - cuda-version >={{ cuda_version }},<{{ cuda_version_next_major }}
-    files:   # [linux]
-      - lib/libnvptxcompiler_static.a  # [linux]
     requirements:
       host:
         - {{ pin_subpackage("cuda-nvvm-impl", exact=True) }}
@@ -186,13 +245,12 @@ outputs:
         - run_nvcc_tests.sh   # [linux]
         - run_nvcc_tests.bat  # [win]
       commands:
-        - test -L $PREFIX/lib/libnvptxcompiler_static.a  # [linux]
         - {{ exists }} nvcc
         - ./run_nvcc_tests.sh   # [linux]
         - .\run_nvcc_tests.bat  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvcc/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -214,10 +272,11 @@ outputs:
       commands:
         - test -d $PREFIX/bin/crt            # [linux]
         - test -f $PREFIX/bin/crt/link.stub  # [linux]
+        - test -f $PREFIX/bin/crt/prelink.stub  # [linux]
         - if not exist %LIBRARY_BIN%\crt\link.stub exit 1  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: crt/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: CUDA internal tools.
@@ -246,7 +305,7 @@ outputs:
         - if not exist %LIBRARY_INC%\crt\common_functions.h exit 1  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: crt/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: CUDA internal headers.
@@ -283,7 +342,7 @@ outputs:
         - if not exist %LIBRARY_PREFIX%\nvvm\libdevice exit 1     # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvvm/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -296,6 +355,8 @@ outputs:
       noarch: generic
     files:   # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
+      - targets/{{ target_name }}/lib/libnvvm_static.a  # [linux]
+      - lib/libnvvm_static.a            # [linux]
     requirements:
       host:
         - cuda-version {{ cuda_version }}
@@ -305,9 +366,11 @@ outputs:
     test:
       commands:
         - test -L $PREFIX/targets/{{ target_name }}/nvvm          # [linux]
+        - test -L $PREFIX/lib/libnvvm_static.a                    # [linux]
+        - test -f $PREFIX/targets/{{ target_name }}/lib/libnvvm_static.a  # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvvm/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -347,7 +410,7 @@ outputs:
         - if not exist %LIBRARY_PREFIX%\nvvm\lib exit 1      # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: LICENSE
+      license_file: nvvm/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
