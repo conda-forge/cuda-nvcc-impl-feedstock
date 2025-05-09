@@ -1,10 +1,9 @@
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.8.61" %}
-{% set cuda_version = "12.8" %}
+{% set version = "13.0.9" %}
+{% set cuda_version = "13.0" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
-{% set gcc_constraint = ">=6,<15.0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64 and arm_variant_type == "sbsa"]
@@ -20,47 +19,47 @@
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
 
-{% set nvcc_sha256 = "6276180e7e203dfb230aa0cc5954096bafbaff2e03d875ef3d68cff5a7fd179d" %}  # [linux64]
-{% set nvcc_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvcc_sha256 = "492100c36e09e0fe8da6b8f1a2ac858cf86cfe2dbe6ca25200d47006cc27451f" %}  # [linux64]
+{% set nvcc_sha256 = "c8d2c8a3fc64fb069deb1bf10f0f8f9d23d95f7dd0bfe594090d984adb124871" %}  # [aarch64 and arm_variant_type == "sbsa"]
 {% set nvcc_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set nvcc_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set nvcc_sha256 = "c16a016b578d8f5ff3ce4252cdc7cad81715a27334eace4990ec5c5fcd1e3aab" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set crt_sha256 = "d2cb58eed6762393b3df623c47649acc2e4fa6238f5ca3ec6d1d66c0df6e9f59" %}  # [linux64]
-{% set crt_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set crt_sha256 = "c4ee44f9a72612102f721e6c7e7c3db80f00dd7df28dc709052be8ba4329f158" %}  # [linux64]
+{% set crt_sha256 = "8a7344b0e1740fa5b8e10e4d38d0fdde593a9d735f065dcbbd4917cd34609fbb" %}  # [aarch64 and arm_variant_type == "sbsa"]
 {% set crt_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set crt_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set crt_sha256 = "6b5c1ad73965231d19dbb2d9702427abe545f3fc54eb45ded35027fa13159859" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set nvvm_sha256 = "b8728a1ecd5dc7abfd3237e0caf7644f0b9533d64bbc7da3839a0214318caa55" %}  # [linux64]
-{% set nvvm_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvvm_sha256 = "51b0c11b4090f8ddc04ea7833a02ac37b1055fdafe860b02621c394811309a79" %}  # [linux64]
+{% set nvvm_sha256 = "ac144d448674528ad5c9b0d70bf284b610cad2da0ff9c916f1c4fa3dc946f459" %}  # [aarch64 and arm_variant_type == "sbsa"]
 {% set nvvm_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set nvvm_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set nvvm_sha256 = "daa11d58bb98744228e33388659cfbb69904b7ff9c0a3eaec2f691290bb0a005" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set libnvptxcompiler_sha256 = "f6eefbdf76096a98948a037e05c3b0ab289066f97041ec140ebf8d0e5ce878f2" %}  # [linux64]
-{% set libnvptxcompiler_sha256 = "dc0b713ce69fd921aa53ac68610717d126fc273a3c554b0465cf44d7e379f467" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set libnvptxcompiler_sha256 = "b9a3f23fa66874f764ab15a6a49dc728c63350bc3a9021ed2f51b311da8cd60c" %}  # [linux64]
+{% set libnvptxcompiler_sha256 = "2cec5f0586b96ee446f9efb7bbe60f22945d27e19eff1d6090a97da43e27d6e9" %}  # [aarch64 and arm_variant_type == "sbsa"]
 {% set libnvptxcompiler_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set libnvptxcompiler_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set libnvptxcompiler_sha256 = "6fa5a1abbd179a522b0fa39e7ca348239b456294f6281f8764cbd58260dabdfe" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
   version: {{ version }}
 
 source:
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.{{ extension }}
+  - url: cuda_nvcc-linux-x86_64-13.0.9-archive.tar.xz
     sha256: {{ nvcc_sha256 }}
     folder: nvcc
     patches:
       - nvcc.profile.patch      # [linux]
       - nvcc.profile.patch.win  # [win]
 
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_crt/{{ platform }}/cuda_crt-{{ platform }}-{{ version }}-archive.{{ extension }}
+  - url: cuda_crt-linux-x86_64-13.0.9-archive.tar.xz
     folder: crt
     sha256: {{ crt_sha256 }}
 
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/libnvvm/{{ platform }}/libnvvm-{{ platform }}-{{ version }}-archive.{{ extension }}
+  - url: libnvvm-linux-x86_64-13.0.9-archive.tar.xz
     folder: nvvm
     sha256: {{ nvvm_sha256 }}
 
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/libnvptxcompiler/{{ platform }}/libnvptxcompiler-{{ platform }}-{{ version }}-archive.{{ extension }}
+  - url: libnvptxcompiler-linux-x86_64-13.0.9-archive.tar.xz
     folder: libnvptxcompiler
     sha256: {{ libnvptxcompiler_sha256 }}
 
