@@ -1,7 +1,7 @@
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "13.0.9" %}
+{% set version = "13.0.24" %}
 {% set cuda_version = "12.9" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
@@ -19,47 +19,47 @@
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
 
-{% set nvcc_sha256 = "492100c36e09e0fe8da6b8f1a2ac858cf86cfe2dbe6ca25200d47006cc27451f" %}  # [linux64]
-{% set nvcc_sha256 = "c8d2c8a3fc64fb069deb1bf10f0f8f9d23d95f7dd0bfe594090d984adb124871" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set nvcc_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set nvcc_sha256 = "c16a016b578d8f5ff3ce4252cdc7cad81715a27334eace4990ec5c5fcd1e3aab" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set nvcc_sha256 = "4baaedc5ca6f29d3f489001e22e617db83c14495ef346f2440c89151798683ee" %}  # [linux64]
+{% set nvcc_sha256 = "9c175faaad2f720b6c4a2afac857c30d990a61ca7ab3b9420b3ec405c3a04064" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvcc_sha256 = "732722e16a965efd7871190ce02f14fd79d60abfae3682302189ae12beef776e" %}  # [win]
+{% set nvcc_sha256 = "daa33faf11a89b6f1e04e465f45ead730c0938c1869dd36687fd1a0fb978f528" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set crt_sha256 = "c4ee44f9a72612102f721e6c7e7c3db80f00dd7df28dc709052be8ba4329f158" %}  # [linux64]
-{% set crt_sha256 = "8a7344b0e1740fa5b8e10e4d38d0fdde593a9d735f065dcbbd4917cd34609fbb" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set crt_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set crt_sha256 = "6b5c1ad73965231d19dbb2d9702427abe545f3fc54eb45ded35027fa13159859" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set crt_sha256 = "def7dbd418ee8c1afb9945f32a7bd96ae4951be5be77464b2ed5202b75bcae6a" %}  # [linux64]
+{% set crt_sha256 = "f4c7b1741ad91b02ee2199c37f09111e114954f32ff9a7a583b834f3b7de00d5" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set crt_sha256 = "e64b1981dd8da5fcc8569d3b79f5e9074315e683b1781e4460425308adbedd15" %}  # [win]
+{% set crt_sha256 = "890afe2455e87c72145b2309ec7b97e81fed73323c26e7bef28e1e7cb79b254a" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set nvvm_sha256 = "51b0c11b4090f8ddc04ea7833a02ac37b1055fdafe860b02621c394811309a79" %}  # [linux64]
-{% set nvvm_sha256 = "ac144d448674528ad5c9b0d70bf284b610cad2da0ff9c916f1c4fa3dc946f459" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set nvvm_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set nvvm_sha256 = "daa11d58bb98744228e33388659cfbb69904b7ff9c0a3eaec2f691290bb0a005" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set nvvm_sha256 = "7c50e8692ebc187baa93c9d4b81b5b4377e2b873c0ba1347d49191e0ec42f3c2" %}  # [linux64]
+{% set nvvm_sha256 = "57425c2b40648ea945db93dfb74939824024b24f12687285b08afcf336e8c7fb" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvvm_sha256 = "749b9542da0cbdec3f71369ade0cf15f82468adcc5824101a34ece390524d4c4" %}  # [win]
+{% set nvvm_sha256 = "5a82013793ea478ab1d62565000c28fcbf9c124016d700f34ab3af549f852b0f" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set libnvptxcompiler_sha256 = "b9a3f23fa66874f764ab15a6a49dc728c63350bc3a9021ed2f51b311da8cd60c" %}  # [linux64]
-{% set libnvptxcompiler_sha256 = "2cec5f0586b96ee446f9efb7bbe60f22945d27e19eff1d6090a97da43e27d6e9" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set libnvptxcompiler_sha256 = "9fdc70b4271ed9aad4d64cd7076a7d96ec36512d074b9995fe638de669197391" %}  # [win]
-{% set libnvptxcompiler_sha256 = "6fa5a1abbd179a522b0fa39e7ca348239b456294f6281f8764cbd58260dabdfe" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set libnvptxcompiler_sha256 = "35dff37bdb3917cad787ef6d8696ed882856472e0b8f15baa034e395405a70e4" %}  # [linux64]
+{% set libnvptxcompiler_sha256 = "3ed0809558c8dfb92bfeb3c7e6069bda1a220668f09912d37ca9a4aa224c4f36" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set libnvptxcompiler_sha256 = "3fc89ebc5aa87f04384656bbc4a51d46b695288288b3f69702aa277a944ba34f" %}  # [win]
+{% set libnvptxcompiler_sha256 = "9bc3e70a6827b07af76d2c542dd652513eb3440acc80d0200f6ee462fd6ea868" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
   version: {{ version }}
 
 source:
-  - url: cuda_nvcc-linux-x86_64-13.0.9-archive.tar.xz
+  - url: cuda_nvcc-{{ platform }}-{{ version }}-archive.tar.xz
     sha256: {{ nvcc_sha256 }}
     folder: nvcc
     patches:
       - nvcc.profile.patch      # [linux]
       - nvcc.profile.patch.win  # [win]
 
-  - url: cuda_crt-linux-x86_64-13.0.9-archive.tar.xz
+  - url: cuda_crt-{{ platform }}-{{ version }}-archive.tar.xz
     folder: crt
     sha256: {{ crt_sha256 }}
 
-  - url: libnvvm-linux-x86_64-13.0.9-archive.tar.xz
+  - url: libnvvm-{{ platform }}-{{ version }}-archive.tar.xz
     folder: nvvm
     sha256: {{ nvvm_sha256 }}
 
-  - url: libnvptxcompiler-linux-x86_64-13.0.9-archive.tar.xz
+  - url: libnvptxcompiler-{{ platform }}-{{ version }}-archive.tar.xz
     folder: libnvptxcompiler
     sha256: {{ libnvptxcompiler_sha256 }}
 
@@ -321,7 +321,6 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}
-        - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
       host:
         - cuda-version {{ cuda_version }}
@@ -354,8 +353,6 @@ outputs:
       noarch: generic
     files:   # [linux]
       - targets/{{ target_name }}/nvvm  # [linux]
-      - targets/{{ target_name }}/lib/libnvvm_static.a  # [linux]
-      - lib/libnvvm_static.a            # [linux]
     requirements:
       host:
         - cuda-version {{ cuda_version }}
@@ -365,8 +362,6 @@ outputs:
     test:
       commands:
         - test -L $PREFIX/targets/{{ target_name }}/nvvm          # [linux]
-        - test -L $PREFIX/lib/libnvvm_static.a                    # [linux]
-        - test -f $PREFIX/targets/{{ target_name }}/lib/libnvvm_static.a  # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: nvvm/LICENSE
@@ -389,7 +384,6 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}
-        - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
       host:
         - cuda-version {{ cuda_version }}
