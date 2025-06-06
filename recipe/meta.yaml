@@ -1,7 +1,7 @@
 {% set gcc_constraint = ">=6,<15.0a0" %}
 {% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "12.9.41" %}
+{% set version = "12.9.86" %}
 {% set cuda_version = "12.9" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set gcc_min_constraint = ">=6" %}
@@ -20,10 +20,10 @@
 {% set extension = "zip" %}  # [win]
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
-{% set sha256 = "b3a0e115840e04c0cfa559263cbbe8b78a2455788e12605732aff68abc50dd34" %}  # [linux64]
-{% set sha256 = "3d3aeae22223aa7a797499ab553ab63b5d5d47c1f78fe0638525a6ae807d9962" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set sha256 = "b83e3d6e57a078ba064051782d6312fbe4a3c8f73d6fe771b768e924a5d95788" %}  # [win]
-{% set sha256 = "d432a54ef8f68cc01a98ccdfbb34b6df89badbd710f5e0f6408d819c03b6d517" %}  # [aarch64 and arm_variant_type == "tegra"]
+{% set sha256 = "7a1a5b652e5ef85c82b721d10672fc9a2dbaab44e9bd3c65a69517bf53998c35" %}  # [linux64]
+{% set sha256 = "0aa1fce92dbae76c059c27eefb9d0ffb58e1291151e44ff7c7f1fc2dd9376c0d" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set sha256 = "227b109663b5e57d2718bcabb24a4ba0d9d4e52d958e327dc476f7c28691be85" %}  # [win]
+{% set sha256 = "2432ef8a7c12d0a9ce3332a8af42b123c07f256390b3390802b1b2c6254c6c74" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
   name: cuda-nvcc-impl-split
