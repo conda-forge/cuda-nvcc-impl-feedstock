@@ -1,22 +1,28 @@
-c_compiler_version:        # [linux]
-  - 14                     # [linux]
-cxx_compiler_version:      # [linux]
-  - 14                     # [linux]
 # For some reason, the minimum glibc version for tegra is much higher than sbsa
 c_stdlib_version:  # [linux and aarch64]
   - "2.17"  # [linux and aarch64]
-#  - "2.34"  # [linux and aarch64]
 
 arm_variant_type:  # [linux and aarch64]
   - sbsa           # [linux and aarch64]
-#  - tegra          # [linux and aarch64]
 
-VCVER:                     # [win]
-  - 14.3                   # [win]
-c_compiler:                # [win]
-  - vs2022                 # [win]
-cxx_compiler:              # [win]
-  - vs2022                 # [win]
+# https://learn.microsoft.com/en-us/cpp/overview/compiler-versions
+# https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#system-requirements
+vc_min_constraint:              # [win]
+  # 14.2x corresponds to vs2019
+  - ">=14.2"            # [win]
+vc_max_constraint:              # [win]
+  # 14.5x corresponds to vs2026
+  - "<14.6a0"           # [win]
+
+# https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#host-compiler-support-policy
+gcc_min_constraint:
+  - ">=6"
+gcc_max_constraint:
+  - "<17.0a0"
+clang_min_constraint:
+  - ">=7"
+clang_max_constraint:
+  - "<23.0a0"
 
 zip_keys:
   -                     # [linux and aarch64]

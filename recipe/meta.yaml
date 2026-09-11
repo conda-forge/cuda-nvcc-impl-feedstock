@@ -1,5 +1,3 @@
-{% set gcc_constraint = ">=6,<16.0a0" %}
-{% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
 {% set version = "13.4.59" %}
 {% set cuda_version = "13.4" %}
@@ -108,7 +106,8 @@ outputs:
         - {{ pin_subpackage("cuda-nvvm-tools", exact=True) }}
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
       run_constrained:
-        - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
+        - gcc_impl_{{ target_platform }} {{ gcc_min_constraint }},{{ gcc_max_constraint }}  # [linux]
+        - clang_impl_{{ target_platform }} {{ clang_min_constraint }},{{ clang_max_constraint }}  # [linux]
     test:
       requires:
         - patchelf                                                # [linux]
@@ -163,7 +162,8 @@ outputs:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
         - libgcc {{ gcc_min_constraint }}  # [linux]
       run_constrained:
-        - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
+        - gcc_impl_{{ target_platform }} {{ gcc_min_constraint }},{{ gcc_max_constraint }}  # [linux]
+        - clang_impl_{{ target_platform }} {{ clang_min_constraint }},{{ clang_max_constraint }}  # [linux]
         - cuda-nvcc-dev_{{ other_win_target }} <0a0            # [win]
     test:
       commands:
@@ -261,8 +261,9 @@ outputs:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - cuda-cudart-dev
       run_constrained:
-        - gcc_impl_{{ target_platform }} {{ gcc_constraint }}  # [linux]
-        - vc >={{ VCVER }}                      # [win]
+        - gcc_impl_{{ target_platform }} {{ gcc_min_constraint }},{{ gcc_max_constraint }}  # [linux]
+        - clang_impl_{{ target_platform }} {{ clang_min_constraint }},{{ clang_max_constraint }}  # [linux]
+        - vc {{ vc_min_constraint }},{{ vc_max_constraint }}                      # [win]
     test:
       requires:
         - {{ compiler("c") }}
