@@ -22,3 +22,6 @@ zip_keys:
   -                     # [linux and aarch64]
     - arm_variant_type  # [linux and aarch64]
     - c_stdlib_version  # [linux and aarch64]
+c_stdlib:
+  - sysroot        # [linux]
+  - vs             # [win]
