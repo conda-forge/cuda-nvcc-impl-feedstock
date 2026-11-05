@@ -1,8 +1,8 @@
 {% set gcc_constraint = ">=6,<16.0a0" %}
 {% set gcc_min_constraint = ">=6" %}
 {% set name = "cuda-nvcc-impl" %}
-{% set version = "13.4.92" %}
-{% set cuda_version = "13.4" %}
+{% set version = "13.5.37" %}
+{% set cuda_version = "13.5" %}
 {% set cuda_version_next_major = (cuda_version.split(".")[0]|int + 1)|string + ".0a0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -23,28 +23,28 @@
 {% set exists = "which" %}  # [not win]
 {% set exists = "where" %}  # [win]
 
-{% set nvcc_sha256 = "60998f40cc9df5826b2a846e2dcc328133fbc5ef539398ce0a21cf5dcac7193d" %}  # [linux64]
-{% set nvcc_sha256 = "8aebd451afb3984bc0019e803ae8a01a3837b7c69f36db779a7ce77e70831f5f" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set nvcc_sha256 = "23950047aa5405993129a982a99924b4e6d5eb9bc312300030f3afd9b3b49ea4" %}  # [win and not arm64]
-{% set nvcc_sha256 = "8ca6e46052dba9e1a3e72d071ce83079e7edf70020f94eac54de55689b0d2141" %}  # [win and arm64]
+{% set nvcc_sha256 = "ac41262734f3c62cd75a502081cfae093b03b846d7f9274d8b1eb41f83209b96" %}  # [linux64]
+{% set nvcc_sha256 = "0c6756fdda5a4c5159dc5181788bd68c9d261e71d6f299ebb241185e113254a3" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvcc_sha256 = "daf9ea2304917ea6426be5fbe0e86c34cccc07c4f593cbc9070da54a8f7f4b27" %}  # [win and not arm64]
+{% set nvcc_sha256 = "95257306e88e163f6c23ddba8708111db0422ec18b7901e121bfe21acff5ea98" %}  # [win and arm64]
 #{% set nvcc_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set crt_sha256 = "c969e61ded12dbf0cf20ace72867f1622ec0e8ea1e1d305e27761012025f7aaa" %}  # [linux64]
-{% set crt_sha256 = "0358db52257885611664240e030e45528f052aa1360c886f55dbaf2b2d61f87d" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set crt_sha256 = "a38e3aa75e259128a1c7fb46e706182e4babca407cd3f3c447d21ab7fb14c7fd" %}  # [win and not arm64]
-{% set crt_sha256 = "3fa09349f4af5a39ffb806ce48db9c406f81fcd3366e066fdca6eba97927764a" %}  # [win and arm64]
+{% set crt_sha256 = "0df5c0ca27392152f370751c82b27ff1ab67661e4810cfc7248e2e03479c9ae0" %}  # [linux64]
+{% set crt_sha256 = "65d373eead42f1544363027c9ee3e6e6eb223c27743749e84ce1e9595bc71b33" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set crt_sha256 = "acf9730a9731f08fab5719684ed3e64f16cb592571c700bfa342fe32d3ca2047" %}  # [win and not arm64]
+{% set crt_sha256 = "d473996aed38f077a59fdf3bae637da5f424dc41dc3db26a7eedf3f5710d2144" %}  # [win and arm64]
 #{% set crt_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set nvvm_sha256 = "0e619cf3d5b27f7c812665599ca9761fc296e56129b24a85d822a5d8a1a3bd75" %}  # [linux64]
-{% set nvvm_sha256 = "483085a4f52d272ea2c5a6cb4727b24efc2cecab4c4df99e80dfc6548e5b7929" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set nvvm_sha256 = "64fa39ad6332d6c40a02115d64827272f6befbc86e50568254f44d37d924e10b" %}  # [win and not arm64]
-{% set nvvm_sha256 = "3bd0c42bca5f16a6055b32a10535e48c23e8701eb9c9fbb7e6eff655841cfe9d" %}  # [win and arm64]
+{% set nvvm_sha256 = "8dd4866e387f0ce2259e8dcc91bebdbb59f84c6d4505b3bba46ae91b9a11dd16" %}  # [linux64]
+{% set nvvm_sha256 = "6c79308860d5eb47c6dd3693652a4d7cd430050438d31d5f036aa0b19583f2ea" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set nvvm_sha256 = "0cb16fa041acd156b3654b66f182f65373a4ebfd4c2353ce7303f4d1b1eb88b2" %}  # [win and not arm64]
+{% set nvvm_sha256 = "69c107867727c4bc2d52c4db8307256ec6f5207eeb466526d774bd8bc390208e" %}  # [win and arm64]
 #{% set nvvm_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
-{% set libnvptxcompiler_sha256 = "6b40eb5833c745568f575633381e1fec369f6fa1313b3efe3dd7783f353819cd" %}  # [linux64]
-{% set libnvptxcompiler_sha256 = "e19aa8b63d6e6a90eea08e9801e7f0aef0c48bd81377b3e43c604ee84937f4fe" %}  # [aarch64 and arm_variant_type == "sbsa"]
-{% set libnvptxcompiler_sha256 = "1e9d858c2f16e18b8399fbb6f762560d3e8bd30b36dfd15c968d3cd59736e4e7" %}  # [win and not arm64]
-{% set libnvptxcompiler_sha256 = "fdc12e1e583f8058edc7960b137cf9acabe8f8bee655b972a34204d9c699a1e2" %}  # [win and arm64]
+{% set libnvptxcompiler_sha256 = "e92761c2c83fdbe1c582aab568e684371c3023e88b7b4c6fb3d92e3feb160b67" %}  # [linux64]
+{% set libnvptxcompiler_sha256 = "8f5503e8a7ced0e676ce327eb83f5a1650b59f54d66e6cf704d2d4ee9583eb2d" %}  # [aarch64 and arm_variant_type == "sbsa"]
+{% set libnvptxcompiler_sha256 = "830ec07b03aa0c4fc99932af62bf97e9eb0ecd06a4abe77d76f1907178aab0e3" %}  # [win and not arm64]
+{% set libnvptxcompiler_sha256 = "678b11ef15fe634a89214b4c2d9fba620b5e64ba225475797374a344a0486206" %}  # [win and arm64]
 #{% set libnvptxcompiler_sha256 = "2eb267e6ebbe17e5ebc593bae8b83fa927c3e53cbf43ef5c614eff6c94053d10" %}  # [aarch64 and arm_variant_type == "tegra"]
 
 package:
